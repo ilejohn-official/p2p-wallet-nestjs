@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
+import envVariables from "./config";
 
 @Injectable()
 export class AppService {
   getHello(): string {
-    return 'Hello World!';
+    return `${envVariables.appName} is Online!`;
   }
 }
