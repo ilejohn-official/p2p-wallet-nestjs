@@ -6,8 +6,15 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { User } from './users/user.entity';
 import envVariables from './config';
-const { dbHost, dbPort, dbUser, dbPassword, dbDatabase, dbDatabaseTest } =
-  envVariables;
+const {
+  dbHost,
+  dbPort,
+  dbUser,
+  dbPassword,
+  dbDatabase,
+  appEnv,
+  dbDatabaseTest,
+} = envVariables;
 
 @Module({
   imports: [
@@ -19,8 +26,7 @@ const { dbHost, dbPort, dbUser, dbPassword, dbDatabase, dbDatabaseTest } =
       password: dbPassword,
       database: dbDatabase,
       entities: [User],
-      //change to false on production
-      synchronize: true,
+      synchronize: appEnv === 'production' ? false : true,
     }),
     UsersModule,
     AuthModule,
